@@ -152,6 +152,11 @@ OptionsWidget::OptionsWidget(
 		depthPerceptionSlider, SIGNAL(valueChanged(int)),
 		this, SLOT(depthPerceptionChangedSlot(int))
 	);
+	
+	// +
+	thresholdSlider->setMinimum(-50);
+	thresholdSlider->setMaximum(50);
+	thresholLabel->setText(QString::number(thresholdSlider->value()));
 }
 
 OptionsWidget::~OptionsWidget()
@@ -248,6 +253,9 @@ OptionsWidget::bwThresholdChanged()
 	QString const tooltip_text(QString::number(value));
 	thresholdSlider->setToolTip(tooltip_text);
 	
+	// +
+	thresholLabel->setText(QString::number(value));
+		
 	if (m_ignoreThresholdChanges) {
 		return;
 	}
@@ -277,6 +285,9 @@ OptionsWidget::bwThresholdChanged()
 	m_colorParams.setBlackWhiteOptions(opt);
 	m_ptrSettings->setColorParams(m_pageId, m_colorParams);
 	emit reloadRequested();
+	
+	// +
+	emit invalidateThumbnail(m_pageId);
 }
 
 void
