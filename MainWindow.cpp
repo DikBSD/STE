@@ -1540,7 +1540,7 @@ MainWindow::updateWindowTitle()
 		project_name = QFileInfo(m_projectFile).baseName();
 	}
 	QString const version(QString::fromUtf8(VERSION));
-	setWindowTitle(tr("%1 - Scan Tailor %2").arg(project_name, version));
+	setWindowTitle(tr("%1 - Scan Tailor Extended %2").arg(project_name, version)); // +
 }
 
 /**

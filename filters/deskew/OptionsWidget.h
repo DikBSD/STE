@@ -25,6 +25,9 @@
 #include "PageId.h"
 #include "Dependencies.h"
 #include "AutoManualMode.h"
+// +
+#include <set>
+#include "PageSelectionAccessor.h"
 
 namespace deskew
 {
@@ -61,7 +64,8 @@ public:
 		AutoManualMode m_mode;
 	};
 	
-	OptionsWidget(IntrusivePtr<Settings> const& settings);
+	OptionsWidget(IntrusivePtr<Settings> const& settings,
+		PageSelectionAccessor const& page_selection_accessor); // +
 	
 	virtual ~OptionsWidget();
 signals:
@@ -76,6 +80,10 @@ private slots:
 	void spinBoxValueChanged(double skew_degrees);
 	
 	void modeChanged(bool auto_mode);
+	
+	void showDeskewDialog();								// +
+	void appliedTo(std::set<PageId> const& pages); 			// +
+	void appliedToAllPages(std::set<PageId> const& pages);	// +
 private:
 	void updateModeIndication(AutoManualMode mode);
 	
@@ -96,6 +104,8 @@ private:
 	UiData m_uiData;
 	int m_ignoreAutoManualToggle;
 	int m_ignoreSpinBoxChanges;
+	
+	PageSelectionAccessor m_pageSelectionAccessor; // +
 };
 
 } // namespace deskew

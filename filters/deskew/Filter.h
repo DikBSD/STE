@@ -28,6 +28,8 @@
 
 class PageId;
 class QString;
+// +
+class PageSelectionAccessor;
 
 namespace select_content
 {
@@ -47,7 +49,7 @@ class Filter : public AbstractFilter
 {
 	DECLARE_NON_COPYABLE(Filter)
 public:
-	Filter();
+	Filter(PageSelectionAccessor const& page_selection_accessor); // +
 	
 	virtual ~Filter();
 	
